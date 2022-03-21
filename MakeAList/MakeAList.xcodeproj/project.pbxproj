@@ -20,6 +20,7 @@
 		1268722027E8558A009C7C1B /* MainList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721A27E8558A009C7C1B /* MainList+CoreDataProperties.swift */; };
 		1268722127E8558A009C7C1B /* ProductList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721B27E8558A009C7C1B /* ProductList+CoreDataClass.swift */; };
 		1268722227E8558A009C7C1B /* ProductList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721C27E8558A009C7C1B /* ProductList+CoreDataProperties.swift */; };
+		1268722427E8F07F009C7C1B /* MainEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268722327E8F07F009C7C1B /* MainEntryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		1268721A27E8558A009C7C1B /* MainList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1268721B27E8558A009C7C1B /* ProductList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1268721C27E8558A009C7C1B /* ProductList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1268722327E8F07F009C7C1B /* MainEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEntryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +56,6 @@
 		125C672E27DFC8B300C097D9 = {
 			isa = PBXGroup;
 			children = (
-				1268721727E8558A009C7C1B /* Link+CoreDataClass.swift */,
-				1268721827E8558A009C7C1B /* Link+CoreDataProperties.swift */,
-				1268721927E8558A009C7C1B /* MainList+CoreDataClass.swift */,
-				1268721A27E8558A009C7C1B /* MainList+CoreDataProperties.swift */,
-				1268721B27E8558A009C7C1B /* ProductList+CoreDataClass.swift */,
-				1268721C27E8558A009C7C1B /* ProductList+CoreDataProperties.swift */,
 				125C673927DFC8B300C097D9 /* MakeAList */,
 				125C673827DFC8B300C097D9 /* Products */,
 			);
@@ -80,9 +76,10 @@
 				125C673A27DFC8B300C097D9 /* AppDelegate.swift */,
 				125C673C27DFC8B300C097D9 /* SceneDelegate.swift */,
 				125C673E27DFC8B300C097D9 /* ViewController.swift */,
+				1268722327E8F07F009C7C1B /* MainEntryViewController.swift */,
 				125C674027DFC8B300C097D9 /* Main.storyboard */,
-				125C674627DFC8B600C097D9 /* Assets.xcassets */,
 				125C674827DFC8B600C097D9 /* LaunchScreen.storyboard */,
+				125C674627DFC8B600C097D9 /* Assets.xcassets */,
 				125C674B27DFC8B600C097D9 /* Info.plist */,
 				125C674327DFC8B300C097D9 /* MakeAList.xcdatamodeld */,
 			);
@@ -102,6 +99,8 @@
 		1268720827E85426009C7C1B /* MainList */ = {
 			isa = PBXGroup;
 			children = (
+				1268721927E8558A009C7C1B /* MainList+CoreDataClass.swift */,
+				1268721A27E8558A009C7C1B /* MainList+CoreDataProperties.swift */,
 			);
 			path = MainList;
 			sourceTree = "<group>";
@@ -109,6 +108,8 @@
 		1268720927E85431009C7C1B /* Link */ = {
 			isa = PBXGroup;
 			children = (
+				1268721727E8558A009C7C1B /* Link+CoreDataClass.swift */,
+				1268721827E8558A009C7C1B /* Link+CoreDataProperties.swift */,
 			);
 			path = Link;
 			sourceTree = "<group>";
@@ -116,6 +117,8 @@
 		1268720A27E85447009C7C1B /* ProductList */ = {
 			isa = PBXGroup;
 			children = (
+				1268721B27E8558A009C7C1B /* ProductList+CoreDataClass.swift */,
+				1268721C27E8558A009C7C1B /* ProductList+CoreDataProperties.swift */,
 			);
 			path = ProductList;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1268722027E8558A009C7C1B /* MainList+CoreDataProperties.swift in Sources */,
+				1268722427E8F07F009C7C1B /* MainEntryViewController.swift in Sources */,
 				1268722127E8558A009C7C1B /* ProductList+CoreDataClass.swift in Sources */,
 				125C673F27DFC8B300C097D9 /* ViewController.swift in Sources */,
 				1268721E27E8558A009C7C1B /* Link+CoreDataProperties.swift in Sources */,

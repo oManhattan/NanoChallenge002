@@ -10,13 +10,20 @@ import UIKit
 var lista: [MainList] = MainList().getAllItems()
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var mainTable: UITableView!
     
     @IBAction func didTapAppList(_ sender: Any) {
-        adicionarTesate()
+        let entry = storyboard?.instantiateViewController(withIdentifier: "mainEntryViewController") as! MainEntryViewController
+        entry.title = "Nova lista"
+        entry.update = {
+            lista = MainList().getAllItems()
+            DispatchQueue.main.async {
+                self.mainTable.reloadData()
+            }
+        }
+        navigationController?.pushViewController(entry, animated: true)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,27 +32,52 @@ class ViewController: UIViewController {
         
         mainTable.delegate = self
         mainTable.dataSource = self
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editarTabela))
     }
     
-    func adicionarTesate() {
-        MainList().createList(name: "teste001")
-        MainList().createList(name: "teste002")
-        
-        lista = MainList().getAllItems()
-        
-        for i in lista {
-            print(i.name)
+    @objc func editarTabela() {
+        if mainTable.isEditing {
+            mainTable.setEditing(false, animated: true)
+        } else {
+            mainTable.setEditing(true, animated: true)
         }
-        
-        mainTable.updateConstraints()
     }
 }
 
 // Table View
 
 extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        mainTable.deselectRow(at: indexPath, animated: true)
+    }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Favoritos"
+        case 1:
+            return "Listas"
+        default:
+            return ""
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            tableView.beginUpdates()
+            MainList().deleteList(item: lista[indexPath.row])
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            lista = MainList().getAllItems()
+            tableView.endUpdates()
+        }
+    }
 }
+
 
 extension ViewController: UITableViewDataSource {
     
