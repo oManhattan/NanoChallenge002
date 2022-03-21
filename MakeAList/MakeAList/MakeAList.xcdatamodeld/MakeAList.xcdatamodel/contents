@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Link" representedClassName="Link" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="MainList" representedClassName="MainList" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="productList" optional="YES" attributeType="Transformable" valueTransformerName="[ProductList]"/>
+    </entity>
+    <entity name="ProductList" representedClassName="ProductList" syncable="YES">
+        <attribute name="linkList" optional="YES" attributeType="Transformable" valueTransformerName="[LinkList]"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="MainList" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="ProductList" positionX="-54" positionY="9" width="128" height="59"/>
+        <element name="Link" positionX="-36" positionY="27" width="128" height="59"/>
+    </elements>
 </model>
