@@ -13,6 +13,8 @@ import UIKit
 @objc(MainList)
 public class MainList: NSManagedObject {
     
+    // Funções CRUD
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     private func save() {
@@ -21,17 +23,34 @@ public class MainList: NSManagedObject {
         } catch {}
     }
     
-    func getAllItems() -> [MainList] {
+    func getAllItems() -> [[MainList]] {
         var items: [MainList] = []
         do {
             items = try context.fetch(MainList.fetchRequest())
         } catch {}
-        return items
+        
+        var favoritos: [MainList] = []
+        var noFavoritos: [MainList] = []
+        var output: [[MainList]] = [[]]
+        
+        for i in items {
+            if i.isFavorito == true {
+                favoritos.append(i)
+            } else {
+                noFavoritos.append(i)
+            }
+        }
+        
+        output.append(favoritos)
+        output.append(noFavoritos)
+        
+        return output
     }
     
     func createList(name: String) {
         let newItem = MainList(context: context)
         newItem.name = name
+        newItem.isFavorito = false
         save()
     }
     
@@ -43,6 +62,14 @@ public class MainList: NSManagedObject {
     func updateName(item: MainList, newName: String) {
         item.name = newName
         save()
+    }
+
+    func removeFavorite(item: MainList) {
+        if item.isFavorito == true { item.isFavorito = false }
+    }
+    
+    func addFavorite(item: MainList) {
+        if item.isFavorito == false { item.isFavorito = true }
     }
     
     func changeItems(firstItem: MainList, secondItem: MainList) {

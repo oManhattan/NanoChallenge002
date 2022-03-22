@@ -2,7 +2,7 @@
 //  MainList+CoreDataProperties.swift
 //  MakeAList
 //
-//  Created by Matheus Cavalcanti de Arruda on 21/03/22.
+//  Created by Wellinston Oliveira on 22/03/22.
 //
 //
 
@@ -18,10 +18,10 @@ extension MainList {
 
     @NSManaged public var name: String?
     @NSManaged public var productList: NSObject?
+    @NSManaged public var isFavorito: Bool
 
 }
 
 extension MainList : Identifiable {
 
 }
-

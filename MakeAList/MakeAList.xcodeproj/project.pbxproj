@@ -17,10 +17,10 @@
 		1268721D27E8558A009C7C1B /* Link+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721727E8558A009C7C1B /* Link+CoreDataClass.swift */; };
 		1268721E27E8558A009C7C1B /* Link+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721827E8558A009C7C1B /* Link+CoreDataProperties.swift */; };
 		1268721F27E8558A009C7C1B /* MainList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721927E8558A009C7C1B /* MainList+CoreDataClass.swift */; };
-		1268722027E8558A009C7C1B /* MainList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721A27E8558A009C7C1B /* MainList+CoreDataProperties.swift */; };
 		1268722127E8558A009C7C1B /* ProductList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721B27E8558A009C7C1B /* ProductList+CoreDataClass.swift */; };
 		1268722227E8558A009C7C1B /* ProductList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268721C27E8558A009C7C1B /* ProductList+CoreDataProperties.swift */; };
 		1268722427E8F07F009C7C1B /* MainEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268722327E8F07F009C7C1B /* MainEntryViewController.swift */; };
+		51C1C4F527EA682F00C41A90 /* MainList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C1C4F327EA682F00C41A90 /* MainList+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +36,10 @@
 		1268721727E8558A009C7C1B /* Link+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Link+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1268721827E8558A009C7C1B /* Link+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Link+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1268721927E8558A009C7C1B /* MainList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainList+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1268721A27E8558A009C7C1B /* MainList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1268721B27E8558A009C7C1B /* ProductList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1268721C27E8558A009C7C1B /* ProductList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1268722327E8F07F009C7C1B /* MainEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEntryViewController.swift; sourceTree = "<group>"; };
+		51C1C4F327EA682F00C41A90 /* MainList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				1268721927E8558A009C7C1B /* MainList+CoreDataClass.swift */,
-				1268721A27E8558A009C7C1B /* MainList+CoreDataProperties.swift */,
+				51C1C4F327EA682F00C41A90 /* MainList+CoreDataProperties.swift */,
 			);
 			path = MainList;
 			sourceTree = "<group>";
@@ -194,13 +194,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1268722027E8558A009C7C1B /* MainList+CoreDataProperties.swift in Sources */,
 				1268722427E8F07F009C7C1B /* MainEntryViewController.swift in Sources */,
 				1268722127E8558A009C7C1B /* ProductList+CoreDataClass.swift in Sources */,
 				125C673F27DFC8B300C097D9 /* ViewController.swift in Sources */,
 				1268721E27E8558A009C7C1B /* Link+CoreDataProperties.swift in Sources */,
 				1268721F27E8558A009C7C1B /* MainList+CoreDataClass.swift in Sources */,
 				1268721D27E8558A009C7C1B /* Link+CoreDataClass.swift in Sources */,
+				51C1C4F527EA682F00C41A90 /* MainList+CoreDataProperties.swift in Sources */,
 				125C674527DFC8B300C097D9 /* MakeAList.xcdatamodeld in Sources */,
 				125C673B27DFC8B300C097D9 /* AppDelegate.swift in Sources */,
 				125C673D27DFC8B300C097D9 /* SceneDelegate.swift in Sources */,

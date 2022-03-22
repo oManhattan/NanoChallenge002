@@ -7,7 +7,8 @@
 
 import UIKit
 
-var lista: [MainList] = MainList().getAllItems()
+var lista: [[MainList]] = MainList().getAllItems()
+
 
 class ViewController: UIViewController {
     
@@ -76,7 +77,7 @@ extension ViewController: UITableViewDelegate {
    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
        
        tableView.beginUpdates()
-       MainList().changeItems(firstItem: lista[sourceIndexPath.row], secondItem: lista[destinationIndexPath.row])
+       MainList().changeItems(firstItem: lista[sourceIndexPath.section][sourceIndexPath.row], secondItem: lista[destinationIndexPath.section][destinationIndexPath.row])
        lista = MainList().getAllItems()
        tableView.endUpdates()
        
@@ -86,7 +87,7 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             tableView.beginUpdates()
-            MainList().deleteList(item: lista[indexPath.row])
+            MainList().deleteList(item: lista[indexPath.section][indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
             lista = MainList().getAllItems()
             tableView.endUpdates()
@@ -98,13 +99,17 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        lista[section].count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         lista.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = mainTable.dequeueReusableCell(withIdentifier: "celula01")
-        cell?.textLabel?.text = lista[indexPath.row].name
+        cell?.textLabel?.text = lista[indexPath.section][indexPath.row].name
         return cell!
     }
 }
