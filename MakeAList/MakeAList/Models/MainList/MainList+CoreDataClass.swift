@@ -44,4 +44,16 @@ public class MainList: NSManagedObject {
         item.name = newName
         save()
     }
+    
+    func changeItems(firstItem: MainList, secondItem: MainList) {
+        let auxName = firstItem.name
+        let auxList = firstItem.productList
+        
+        firstItem.name = secondItem.name
+        firstItem.productList = secondItem.productList
+        
+        secondItem.name = auxName
+        secondItem.productList = auxList
+        save()
+    }
 }

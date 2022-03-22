@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editarTabela))
     }
+     
     
     @objc func editarTabela() {
         if mainTable.isEditing {
@@ -67,6 +68,21 @@ extension ViewController: UITableViewDelegate {
         return .delete
     }
     
+    //mover
+   func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+       return true
+   }
+   
+   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+       
+       tableView.beginUpdates()
+       MainList().changeItems(firstItem: lista[sourceIndexPath.row], secondItem: lista[destinationIndexPath.row])
+       lista = MainList().getAllItems()
+       tableView.endUpdates()
+       
+   }
+    
+    //deletar
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             tableView.beginUpdates()
