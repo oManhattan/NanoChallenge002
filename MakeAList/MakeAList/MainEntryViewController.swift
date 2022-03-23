@@ -18,6 +18,7 @@ class MainEntryViewController: UIViewController, UITextFieldDelegate {
         
         title = "Nova lista"
         inputField.delegate
+        inputField.placeholder = "Nome lista"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Criar", style: .done, target: self, action: #selector(saveNewElement))
     }
     

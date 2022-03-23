@@ -23,28 +23,35 @@ public class MainList: NSManagedObject {
         } catch {}
     }
     
-    func getAllItems() -> [[MainList]] {
+    private func fetchItems() -> [MainList]{
         var items: [MainList] = []
         do {
             items = try context.fetch(MainList.fetchRequest())
         } catch {}
         
-        var favoritos: [MainList] = []
-        var noFavoritos: [MainList] = []
-        var output: [[MainList]] = [[]]
+        return items
+    }
+    
+    func getAllItems() -> [[MainList]] {
+        let aux = fetchItems()
         
-        for i in items {
-            if i.isFavorito == true {
-                favoritos.append(i)
+        var listaFavoritos: [MainList] = []
+        var listaLista: [MainList] = []
+        
+        var listaFinal: [[MainList]] = []
+        
+        for item in aux {
+            if item.isFavorito == true {
+                listaFavoritos.append(item)
             } else {
-                noFavoritos.append(i)
+                listaLista.append(item)
             }
         }
         
-        output.append(favoritos)
-        output.append(noFavoritos)
+        listaFinal.append(listaFavoritos)
+        listaFinal.append(listaLista)
         
-        return output
+        return listaFinal
     }
     
     func createList(name: String) {
@@ -70,6 +77,15 @@ public class MainList: NSManagedObject {
     
     func addFavorite(item: MainList) {
         if item.isFavorito == false { item.isFavorito = true }
+    }
+    
+    func changeSection(item: MainList) {
+        
+        if item.isFavorito == true {
+            item.isFavorito = false
+        } else {
+            item.isFavorito = true
+        }
     }
     
     func changeItems(firstItem: MainList, secondItem: MainList) {

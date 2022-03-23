@@ -50,10 +50,13 @@ class ViewController: UIViewController {
 // Table View
 
 extension ViewController: UITableViewDelegate {
+    
+    // Função para quando uma linha fot selecionada
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTable.deselectRow(at: indexPath, animated: true)
     }
     
+    // Determinar o cabeçalho de cada seção
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -76,11 +79,20 @@ extension ViewController: UITableViewDelegate {
    
    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
        
-       tableView.beginUpdates()
-       MainList().changeItems(firstItem: lista[sourceIndexPath.section][sourceIndexPath.row], secondItem: lista[destinationIndexPath.section][destinationIndexPath.row])
-       lista = MainList().getAllItems()
-       tableView.endUpdates()
+       print("sourceIndexPath -> \(sourceIndexPath)")
+       print("sourceIndexPath.section -> \(sourceIndexPath.section) | sourceIndexPath.row -> \(sourceIndexPath.row)\n")
+       print("destinationIndexPath -> \(destinationIndexPath)")
+       print("destinationIndexPath.section -> \(destinationIndexPath.section) | destinationIndexPath.row -> \(destinationIndexPath.row)\n")
        
+       if sourceIndexPath.section == destinationIndexPath.section {
+           MainList().changeItems(firstItem: lista[sourceIndexPath.section][sourceIndexPath.row], secondItem: lista[destinationIndexPath.section][destinationIndexPath.row])
+               lista = MainList().getAllItems()
+           tableView.reloadData()
+       } else {
+           MainList().changeSection(item: lista[sourceIndexPath.section][sourceIndexPath.row])
+           lista = MainList().getAllItems()
+           tableView.reloadData()
+       }
    }
     
     //deletar
