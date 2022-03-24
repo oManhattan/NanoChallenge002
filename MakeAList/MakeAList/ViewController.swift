@@ -8,21 +8,39 @@
 import UIKit
 
 var lista: [[MainList]] = MainList().getAllItems()
+var id: [[IdMainList]] = IdMainList().getAllItems()
 
 
 class ViewController: UIViewController {
+    
+    
     
     @IBOutlet weak var mainTable: UITableView!
     
     @IBAction func didTapAppList(_ sender: Any) {
         let entry = storyboard?.instantiateViewController(withIdentifier: "mainEntryViewController") as! MainEntryViewController
         entry.title = "Nova lista"
+      
+        if(id.isEmpty) {
+            let incremento : Int64 = 1
+            let newId : Int64 = ((id[0][0].id) + incremento)
+            entry.id = id[0][0].id
+            IdMainList().deleteIdMainList(item: id[0][0])
+            IdMainList().createIdMainList(id: newId)
+            print(id[0][0].id)
+        } else {
+            let newId : Int64 = 1
+            IdMainList().createIdMainList(id: newId)
+            id = IdMainList().getAllItems()
+            entry.id = id[0][0].id
+        }
         entry.update = {
             lista = MainList().getAllItems()
             DispatchQueue.main.async {
                 self.mainTable.reloadData()
             }
         }
+        
         navigationController?.pushViewController(entry, animated: true)
     }
     
@@ -121,7 +139,14 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = mainTable.dequeueReusableCell(withIdentifier: "celula01")
-        cell?.textLabel?.text = lista[indexPath.section][indexPath.row].name
+       // let nome : String = lista[indexPath.section][indexPath.row].name!
+        lista = MainList().getAllItems()
+        let id : String = "\(lista[indexPath.section][indexPath.row].id)"
+        print(lista[indexPath.section][indexPath.row].id)
+       
+        
+        let textinho : String = "\(lista[indexPath.section][indexPath.row].name!) \(id)"
+        cell?.textLabel?.text = textinho
         return cell!
     }
 }

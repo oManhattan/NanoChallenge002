@@ -13,6 +13,9 @@ class MainEntryViewController: UIViewController, UITextFieldDelegate {
     
     var update: (() -> Void)?
     
+    //recebendo id do IdMainList
+    var id : Int64?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,7 +29,12 @@ class MainEntryViewController: UIViewController, UITextFieldDelegate {
         guard let text = inputField.text, !text.isEmpty else {
          return
         }
-        MainList().createList(name: text)
+        //fazendo uma variavel com guard para caso a variavel seja nula
+        let newId : Int64 = id!
+       
+      
+        
+        MainList().createList(id: newId, name: text)
         update?()
         navigationController?.popViewController(animated: true)
     }
