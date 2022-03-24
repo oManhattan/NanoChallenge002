@@ -21,8 +21,11 @@ public class IdMainList: NSManagedObject {
     }
     
     func createIdMainList(id: Int64) {
-        let item = IdMainList(context: context)
-        item.id = id
+        var item : [IdMainList] = []
+        do {
+            item = try context.fetch(IdMainList.fetchRequest())
+        } catch {}
+        item[0].id = id
         save()
     }
     

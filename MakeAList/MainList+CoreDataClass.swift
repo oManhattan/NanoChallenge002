@@ -45,6 +45,7 @@ public class MainList: NSManagedObject {
         
         for item in aux {
             if item.isFavorito == true {
+                
                 listaFavoritos.append(item)
             } else {
                 listaLista.append(item)

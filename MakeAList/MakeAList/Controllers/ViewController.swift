@@ -20,19 +20,26 @@ class ViewController: UIViewController {
     @IBAction func didTapAppList(_ sender: Any) {
         let entry = storyboard?.instantiateViewController(withIdentifier: "mainEntryViewController") as! MainEntryViewController
         entry.title = "Nova lista"
-      
-        if(id.isEmpty) {
-            let incremento : Int64 = 1
-            let newId : Int64 = ((id[0][0].id) + incremento)
-            entry.id = id[0][0].id
-            IdMainList().deleteIdMainList(item: id[0][0])
-            IdMainList().createIdMainList(id: newId)
-            print(id[0][0].id)
-        } else {
+        //checar se tem algum registro na IdMainList, só não vai ter na primeira vez
+        if IdMainList().getAllItems().isEmpty {
+            
+            //setando o valor da nova id e mandando para MainEntryViewController para o cadastro do desejo
             let newId : Int64 = 1
             IdMainList().createIdMainList(id: newId)
             id = IdMainList().getAllItems()
             entry.id = id[0][0].id
+            
+        } else {
+            
+            //criando uma variavel para acrescentar na IdMainList após cadastrar um novo desejo
+            let incremento : Int64 = 1
+            let newId : Int64 = ((id[0][0].id) + incremento)
+            print(newId)
+            entry.id = newId
+            IdMainList().deleteIdMainList(item: id[0][0])
+            id = IdMainList().getAllItems()
+            IdMainList().createIdMainList(id: newId)
+            id = IdMainList().getAllItems()
         }
         entry.update = {
             lista = MainList().getAllItems()
@@ -72,6 +79,9 @@ extension ViewController: UITableViewDelegate {
     // Função para quando uma linha fot selecionada
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTable.deselectRow(at: indexPath, animated: true)
+        let product = storyboard?.instantiateViewController(withIdentifier: "ProdutosViewController") as! ProdutosViewController
+        product.id = lista[indexPath.section][indexPath.row].idMainList
+        navigationController?.pushViewController(product, animated: true)
     }
     
     // Determinar o cabeçalho de cada seção
@@ -141,11 +151,7 @@ extension ViewController: UITableViewDataSource {
         let cell = mainTable.dequeueReusableCell(withIdentifier: "celula01")
        // let nome : String = lista[indexPath.section][indexPath.row].name!
         lista = MainList().getAllItems()
-        let id : String = "\(lista[indexPath.section][indexPath.row].id)"
-        print(lista[indexPath.section][indexPath.row].id)
-       
-        
-        let textinho : String = "\(lista[indexPath.section][indexPath.row].name!) \(id)"
+        let textinho : String = "\(lista[indexPath.section][indexPath.row].name!) \(lista[indexPath.section][indexPath.row].idMainList)"
         cell?.textLabel?.text = textinho
         return cell!
     }

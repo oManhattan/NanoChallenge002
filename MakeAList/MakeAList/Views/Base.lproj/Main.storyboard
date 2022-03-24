@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1nY-GY-gO8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1nY-GY-gO8">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -64,6 +64,61 @@
             </objects>
             <point key="canvasLocation" x="892.30769230769226" y="114.45497630331754"/>
         </scene>
+        <!--Produtos View Controller-->
+        <scene sceneID="p4L-7L-VnF">
+            <objects>
+                <viewController storyboardIdentifier="ProdutosViewController" id="dp5-ik-awp" customClass="ProdutosViewController" customModule="MakeAList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nr2-o6-uoR">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Qt2-uU-80R">
+                                <rect key="frame" x="0.0" y="83" width="390" height="678"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="678" id="Vpg-Ub-WOu"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="x02-PG-fqf">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x02-PG-fqf" id="TJo-dk-mcm">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTX-d2-H1W">
+                                <rect key="frame" x="0.0" y="761" width="390" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="add" id="lA8-7f-KdL">
+                                        <connections>
+                                            <action selector="adicionarProduto:" destination="dp5-ik-awp" id="jcm-JV-ioa"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nur-OM-5q7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Qt2-uU-80R" firstAttribute="centerY" secondItem="nr2-o6-uoR" secondAttribute="centerY" id="6DM-eu-v6H"/>
+                            <constraint firstItem="KTX-d2-H1W" firstAttribute="top" secondItem="Qt2-uU-80R" secondAttribute="bottom" id="Gn3-Pb-RK4"/>
+                            <constraint firstItem="nur-OM-5q7" firstAttribute="trailing" secondItem="KTX-d2-H1W" secondAttribute="trailing" id="SIl-c6-yY9"/>
+                            <constraint firstItem="Qt2-uU-80R" firstAttribute="leading" secondItem="nur-OM-5q7" secondAttribute="leading" id="UK2-Op-IUf"/>
+                            <constraint firstItem="KTX-d2-H1W" firstAttribute="leading" secondItem="nr2-o6-uoR" secondAttribute="leading" id="WZL-1o-sDu"/>
+                            <constraint firstItem="Qt2-uU-80R" firstAttribute="trailing" secondItem="nur-OM-5q7" secondAttribute="trailing" id="aZK-jx-I8L"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Qt2-uU-80R" id="JEf-e0-bfd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EFa-wH-sRf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1717" y="114"/>
+        </scene>
         <!--Main Entry View Controller-->
         <scene sceneID="BEc-yf-qM6">
             <objects>
@@ -96,6 +151,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iig-Nj-sgr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="907.69230769230762" y="776.30331753554503"/>
+        </scene>
+        <!--Entry Product View Controller-->
+        <scene sceneID="QUc-Yv-er2">
+            <objects>
+                <viewController storyboardIdentifier="EntryProductViewController" id="kcS-7b-Z1I" customClass="EntryProductViewController" customModule="MakeAList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9hO-ey-Qbm">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insira o nome do produto desejado." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FKH-H4-V6y">
+                                <rect key="frame" x="20" y="162" width="350" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gFf-cA-UgI">
+                                <rect key="frame" x="20" y="202" width="350" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nkc-fu-FcM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gFf-cA-UgI" firstAttribute="leading" secondItem="nkc-fu-FcM" secondAttribute="leading" constant="20" id="5IE-Gq-T78"/>
+                            <constraint firstItem="gFf-cA-UgI" firstAttribute="top" secondItem="FKH-H4-V6y" secondAttribute="bottom" constant="19" id="QQt-F6-q9h"/>
+                            <constraint firstItem="nkc-fu-FcM" firstAttribute="trailing" secondItem="gFf-cA-UgI" secondAttribute="trailing" constant="20" id="UCy-oA-XRW"/>
+                            <constraint firstItem="FKH-H4-V6y" firstAttribute="top" secondItem="nkc-fu-FcM" secondAttribute="top" constant="118" id="qis-cC-Txe"/>
+                            <constraint firstItem="FKH-H4-V6y" firstAttribute="leading" secondItem="nkc-fu-FcM" secondAttribute="leading" constant="20" id="sDi-r0-4Jh"/>
+                            <constraint firstItem="nkc-fu-FcM" firstAttribute="trailing" secondItem="FKH-H4-V6y" secondAttribute="trailing" constant="20" id="xrY-su-dz9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="txtFProduct" destination="gFf-cA-UgI" id="hPv-e4-TDz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NpT-Mc-Gwq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1717" y="776"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MFo-a0-1Rf">
