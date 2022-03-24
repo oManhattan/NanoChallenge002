@@ -7,22 +7,25 @@
 
 import UIKit
 
-var produtos: [[ProductList]] = ProductList().getAllItemsByIdProduct(id: 1)
-
 class ProdutosViewController: UIViewController {
     
+
+    
     var id : Int64?
+    var produtos = [ProductList]()
     
-    
-    func retornaId() -> Int64 {
-        return id!
+    func getProdutos() -> [ProductList]{
+        let temp = ProductList().getAllItemsByIdProduct(id: self.id ?? 0)
+        
+        return temp
     }
+    
     
     @IBAction func adicionarProduto(_ sender: Any) {
         let entryProduto = storyboard?.instantiateViewController(withIdentifier: "EntryProductViewController") as! EntryProductViewController
-        entryProduto.id = id
+        entryProduto.id = self.id
         entryProduto.update = {
-            produtos = ProductList().getAllItemsByIdProduct(id: self.id!)
+            self.produtos = self.getProdutos()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -31,41 +34,36 @@ class ProdutosViewController: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-
-        title = "Produtos"
-
     }
 
 }
 
 extension ProdutosViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Produtos"
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension ProdutosViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        produtos[section].count
+        produtos.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        produtos.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        produtos = ProductList().getAllItemsByIdProduct(id: self.id!)
-        let textinho : String = "\(produtos[indexPath.section][indexPath.row].name!) \(produtos[indexPath.section][indexPath.row].idProduct)"
+        produtos = self.getProdutos()
+        let textinho : String = "\(produtos[indexPath.row].name!) \(produtos[indexPath.row].idProduct)"
         cell?.textLabel?.text = textinho
         return cell!
     }

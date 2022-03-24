@@ -62,12 +62,10 @@ public class ProductList: NSManagedObject {
            return listaFinal
        }
        
-       func getAllItemsByIdProduct(id: Int64) -> [[ProductList]] {
+       func getAllItemsByIdProduct(id: Int64) -> [ProductList] {
            let aux = fetchItems()
            
            var lista: [ProductList] = []
-           
-           var listaFinal: [[ProductList]] = []
            
            for item in aux {
                if item.idProduct == id {
@@ -76,8 +74,6 @@ public class ProductList: NSManagedObject {
                
            }
            
-           listaFinal.append(lista)
-           
-           return listaFinal
+           return lista
        }
 }

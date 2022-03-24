@@ -13,7 +13,7 @@ var id: [[IdMainList]] = IdMainList().getAllItems()
 
 class ViewController: UIViewController {
     
-    
+    var selectedId: Int64 = 0
     
     @IBOutlet weak var mainTable: UITableView!
     
@@ -70,6 +70,8 @@ class ViewController: UIViewController {
             mainTable.setEditing(true, animated: true)
         }
     }
+    
+
 }
 
 // Table View
@@ -78,10 +80,18 @@ extension ViewController: UITableViewDelegate {
     
     // Função para quando uma linha fot selecionada
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        mainTable.deselectRow(at: indexPath, animated: true)
+        
+        
         let product = storyboard?.instantiateViewController(withIdentifier: "ProdutosViewController") as! ProdutosViewController
-        product.id = lista[indexPath.section][indexPath.row].idMainList
         navigationController?.pushViewController(product, animated: true)
+        
+        let tempId = lista[indexPath.section][indexPath.row].idMainList
+        
+        product.id = tempId
+        product.produtos = ProductList().getAllItemsByIdProduct(id: tempId)
+        product.title = lista[indexPath.section][indexPath.row].name
+        
+        mainTable.deselectRow(at: indexPath, animated: true)
     }
     
     // Determinar o cabeçalho de cada seção
