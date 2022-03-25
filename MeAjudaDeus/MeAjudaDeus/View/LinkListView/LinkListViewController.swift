@@ -98,6 +98,7 @@ class LinkListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = self.edit(rowIndexPath: indexPath)
+        edit.backgroundColor = .link
         let delete = self.delete(rowIndexPath: indexPath)
         let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
         return swipe
@@ -129,7 +130,7 @@ class LinkListViewController: UIViewController, UITableViewDelegate, UITableView
     // Atribuindo o valor para cada célula
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = linkTable.dequeueReusableCell(withIdentifier: "cell03", for: indexPath)
-        cell.textLabel?.text = linkList[indexPath.row].name
+        cell.textLabel?.text = "\u{1f517}   \(linkList[indexPath.row].name)"
         return cell
     }
     

@@ -92,6 +92,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = self.edit(rowIndexPath: indexPath)
+        edit.backgroundColor = .link
         let delete = self.delete(rowIndexPath: indexPath)
         let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
         return swipe

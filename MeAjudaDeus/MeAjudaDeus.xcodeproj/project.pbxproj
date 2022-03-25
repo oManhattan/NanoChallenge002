@@ -70,9 +70,6 @@
 		1267696A27EBF58400276B71 = {
 			isa = PBXGroup;
 			children = (
-				1259DD2127EE520900E86A5B /* EditLinkViewController.swift */,
-				1259DD1F27EE51F700E86A5B /* EditProductViewController.swift */,
-				1259DD1D27EE51E100E86A5B /* EditMainListViewController.swift */,
 				1267697527EBF58400276B71 /* MeAjudaDeus */,
 				1267697427EBF58400276B71 /* Products */,
 			);
@@ -117,6 +114,7 @@
 			children = (
 				12E14B0027ED1EBC0030F6B2 /* MainListViewController.swift */,
 				12E14B0227ED28E30030F6B2 /* AddListViewController.swift */,
+				1259DD1D27EE51E100E86A5B /* EditMainListViewController.swift */,
 			);
 			path = MainListView;
 			sourceTree = "<group>";
@@ -126,6 +124,7 @@
 			children = (
 				12E14B0427ED2EC70030F6B2 /* ProductListViewController.swift */,
 				12E14B0827ED3A8A0030F6B2 /* AddProductViewController.swift */,
+				1259DD1F27EE51F700E86A5B /* EditProductViewController.swift */,
 			);
 			path = ProductListView;
 			sourceTree = "<group>";
@@ -135,6 +134,7 @@
 			children = (
 				12E8F84B27ED754D0040B268 /* LinkListViewController.swift */,
 				12E8F84D27ED75700040B268 /* AddLinkViewController.swift */,
+				1259DD2127EE520900E86A5B /* EditLinkViewController.swift */,
 			);
 			path = LinkListView;
 			sourceTree = "<group>";
@@ -414,6 +414,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeAjudaDeus/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Make a List";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -442,6 +443,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeAjudaDeus/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Make a List";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
