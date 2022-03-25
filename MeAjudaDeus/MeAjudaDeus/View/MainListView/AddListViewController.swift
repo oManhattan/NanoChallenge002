@@ -15,7 +15,7 @@ class AddListViewController: UIViewController {
     
     // Funções
     var update: (() -> Void)?
-    
+        
     // Funções botões
     @objc func createList() {
         guard let textInput = inputTextField.text, !textInput.isEmpty else {
@@ -34,8 +34,11 @@ class AddListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
+        
         // Label
-        instructionLabel.text = "Insira um nome para a nova lista."
+        instructionLabel.text = "Insira um nome para a nova lista"
         instructionLabel.textAlignment = .center
         
         // Navigation Controller

@@ -36,7 +36,10 @@ class AddProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        instructionLabel.text = "Insira o desejo."
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
+        
+        instructionLabel.text = "Insira o desejo"
         instructionLabel.textAlignment = .center
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Criar", style: .done, target: self, action: #selector(createProduct))

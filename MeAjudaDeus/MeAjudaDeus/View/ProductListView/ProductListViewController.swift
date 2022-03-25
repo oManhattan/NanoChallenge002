@@ -15,13 +15,26 @@ class ProductListViewController: UIViewController, UITableViewDelegate, UITableV
     
     // View Controller Variáveis
     @IBOutlet weak var productTable: UITableView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var nav: UINavigationItem!
     
     // Função botões
-    @objc func openMenu() {
-        
+    @IBAction func openMenu() {
+        if productTable.isEditing == true {
+            editButton.title = "Editar"
+            productTable.isEditing = false
+        } else {
+            editButton.title = "OK"
+            productTable.isEditing = true
+        }
     }
     
     @IBAction func addProduct() {
+        if productTable.isEditing == true {
+            editButton.title = "Editar"
+            productTable.isEditing = false
+        }
+        
         let addProductViewController = storyboard?.instantiateViewController(withIdentifier: "addProductViewController") as! AddProductViewController
         addProductViewController.selectedList = selectedList
         addProductViewController.update = {
@@ -31,6 +44,37 @@ class ProductListViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         navigationController?.pushViewController(addProductViewController, animated: true)
+    }
+    
+    // --------------------------------------- //
+    private func delete(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "Deletar") { [weak self] (_,_,_) in
+            guard let self = self else {return}
+            self.productTable.beginUpdates()
+            CDProduct().delete(product: self.productList[indexPath.section][indexPath.row])
+            self.productTable.deleteRows(at: [indexPath], with: .fade)
+            self.productList = CDProduct().getProducts(whereID: self.selectedList.id)
+            self.productTable.reloadData()
+            self.productTable.endUpdates()
+        }
+        return action
+    }
+    
+    private func edit(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Editar") { [weak self] (_,_,_) in
+            guard let self = self else {return}
+            
+            let editProductViewController = self.storyboard?.instantiateViewController(withIdentifier: "editProductViewController") as! EditProductViewController
+            editProductViewController.selectedProduct = self.productList[indexPath.section][indexPath.row]
+            editProductViewController.update = {
+                self.productList = CDProduct().getProducts(whereID: self.selectedList.id)
+                DispatchQueue.main.async {
+                    self.productTable.reloadData()
+                }
+            }
+            self.navigationController?.pushViewController(editProductViewController, animated: true)
+        }
+        return action
     }
     
     // TableView
@@ -55,6 +99,17 @@ class ProductListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = self.edit(rowIndexPath: indexPath)
+        let delete = self.delete(rowIndexPath: indexPath)
+        let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
+        return swipe
+    }
+    
     // Determinar o estilo de edição
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
@@ -63,9 +118,9 @@ class ProductListViewController: UIViewController, UITableViewDelegate, UITableV
     // Arrastar produtos
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let sourceProduct = productList[sourceIndexPath.section][sourceIndexPath.row]
-        let destinationProduct = productList[sourceIndexPath.section][destinationIndexPath.row]
         
         if sourceIndexPath.section == destinationIndexPath.section {
+            let destinationProduct = productList[sourceIndexPath.section][destinationIndexPath.row]
             CDProduct().swapProduct(firstProduct: sourceProduct, secondProduct: destinationProduct)
             productList = CDProduct().getProducts(whereID: selectedList.id)
             productTable.reloadData()
@@ -73,18 +128,6 @@ class ProductListViewController: UIViewController, UITableViewDelegate, UITableV
             CDProduct().changeIsDone(product: sourceProduct)
             productList = CDProduct().getProducts(whereID: selectedList.id)
             productTable.reloadData()
-        }
-    }
-    
-    // Deletar produtos
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            productTable.beginUpdates()
-            CDProduct().delete(product: productList[indexPath.section][indexPath.row])
-            productTable.deleteRows(at: [indexPath], with: .fade)
-            productList = CDProduct().getProducts(whereID: selectedList.id)
-            productTable.reloadData()
-            productTable.endUpdates()
         }
     }
     
@@ -107,14 +150,15 @@ class ProductListViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Navigation
+        self.editButton.title = "Editar"
+        
         // View Controller
-        self.title = ("\(selectedList.name)")
+        view.backgroundColor = UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1)
+        self.title = selectedList.name
         
         // Iniciando variáveis
         self.productList = CDProduct().getProducts(whereID: selectedList.id)
-        
-        // Navigation Bar
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .plain, target: self, action: #selector(openMenu))
         
         // TableView
         productTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell02")

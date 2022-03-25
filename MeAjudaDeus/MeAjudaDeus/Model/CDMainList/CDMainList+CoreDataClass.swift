@@ -91,13 +91,14 @@ public class CDMainList:NSManagedObject {
     
     // Trocar duas listas de lugar
     public func swapLists(firstList: CDMainList, secondList: CDMainList) {
-        let temp = firstList
+        let auxName = firstList.name
+        let auxId = firstList.id
         
         firstList.id = secondList.id
         firstList.name = secondList.name
         
-        secondList.id = temp.id
-        secondList.name = temp.name
+        secondList.id = auxId
+        secondList.name = auxName
         
         save()
     }

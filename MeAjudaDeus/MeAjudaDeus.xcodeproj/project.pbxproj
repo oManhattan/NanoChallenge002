@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1259DD1E27EE51E200E86A5B /* EditMainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1259DD1D27EE51E100E86A5B /* EditMainListViewController.swift */; };
+		1259DD2027EE51F700E86A5B /* EditProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1259DD1F27EE51F700E86A5B /* EditProductViewController.swift */; };
+		1259DD2227EE520900E86A5B /* EditLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1259DD2127EE520900E86A5B /* EditLinkViewController.swift */; };
 		1267697727EBF58400276B71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1267697627EBF58400276B71 /* AppDelegate.swift */; };
 		1267697927EBF58400276B71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1267697827EBF58400276B71 /* SceneDelegate.swift */; };
 		1267697E27EBF58400276B71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1267697C27EBF58400276B71 /* Main.storyboard */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1259DD1D27EE51E100E86A5B /* EditMainListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMainListViewController.swift; sourceTree = "<group>"; };
+		1259DD1F27EE51F700E86A5B /* EditProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductViewController.swift; sourceTree = "<group>"; };
+		1259DD2127EE520900E86A5B /* EditLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLinkViewController.swift; sourceTree = "<group>"; };
 		1267697327EBF58400276B71 /* MeAjudaDeus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeAjudaDeus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1267697627EBF58400276B71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1267697827EBF58400276B71 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +70,9 @@
 		1267696A27EBF58400276B71 = {
 			isa = PBXGroup;
 			children = (
+				1259DD2127EE520900E86A5B /* EditLinkViewController.swift */,
+				1259DD1F27EE51F700E86A5B /* EditProductViewController.swift */,
+				1259DD1D27EE51E100E86A5B /* EditMainListViewController.swift */,
 				1267697527EBF58400276B71 /* MeAjudaDeus */,
 				1267697427EBF58400276B71 /* Products */,
 			);
@@ -240,10 +249,13 @@
 			files = (
 				12E8F85927EDFB870040B268 /* CDLink+CoreDataClass.swift in Sources */,
 				12E14B0127ED1EBC0030F6B2 /* MainListViewController.swift in Sources */,
+				1259DD1E27EE51E200E86A5B /* EditMainListViewController.swift in Sources */,
 				1267698127EBF58400276B71 /* MeAjudaDeus.xcdatamodeld in Sources */,
 				12E14B0927ED3A8A0030F6B2 /* AddProductViewController.swift in Sources */,
 				12E14AFD27ED13B50030F6B2 /* CDMainList+CoreDataProperties.swift in Sources */,
+				1259DD2027EE51F700E86A5B /* EditProductViewController.swift in Sources */,
 				1267697727EBF58400276B71 /* AppDelegate.swift in Sources */,
+				1259DD2227EE520900E86A5B /* EditLinkViewController.swift in Sources */,
 				12E14AF527ED125B0030F6B2 /* CDProduct+CoreDataClass.swift in Sources */,
 				12E8F85827EDFB870040B268 /* CDProduct+CoreDataProperties.swift in Sources */,
 				12E14AF327ED12080030F6B2 /* CDMainList+CoreDataClass.swift in Sources */,
@@ -399,6 +411,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeAjudaDeus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -411,7 +424,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.omanhattan.MeAjudaDeus;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oManhattan.MeAjudaDeus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -426,6 +439,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeAjudaDeus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -438,7 +452,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.omanhattan.MeAjudaDeus;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oManhattan.MeAjudaDeus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

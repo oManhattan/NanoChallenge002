@@ -95,11 +95,14 @@ public class CDProduct: NSManagedObject {
     
     // Trocar dois itens de lugar
     public func swapProduct(firstProduct: CDProduct, secondProduct: CDProduct) {
-        let temp = firstProduct
+        let auxName = firstProduct.name
+        let auxPid = firstProduct.pid
         
         firstProduct.name = secondProduct.name
+        firstProduct.pid = secondProduct.pid
         
-        secondProduct.name = temp.name
+        secondProduct.name = auxName
+        secondProduct.pid = auxPid
     }
     
     // Receber todos os produtos que estão relacionados a um id

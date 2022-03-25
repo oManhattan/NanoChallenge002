@@ -14,27 +14,67 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // Variáveis ViewController
     @IBOutlet weak var listTable: UITableView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     // Funções botões
     // Ação para abrir o menu de opções
-    @objc func openMenu() {
-        
+    @IBAction func editTable() {
+        if listTable.isEditing == true {
+            editButton.title = "Edit"
+            listTable.isEditing = false
+        } else {
+            editButton.title = "OK"
+            listTable.isEditing = true
+        }
     }
     
     // Ação para adicionar lista
     @IBAction func addList() {
-        let addListViewController = storyboard?.instantiateViewController(withIdentifier: "addListViewController") as! AddListViewController
+        if listTable.isEditing == true {
+            editButton.title = "Edit"
+            listTable.isEditing = false
+        }
         
+        let addListViewController = storyboard?.instantiateViewController(withIdentifier: "addListViewController") as! AddListViewController
         addListViewController.update = {
             self.mainList = CDMainList().getLists()
             DispatchQueue.main.async {
                 self.listTable.reloadData()
             }
         }
-        
         navigationController?.pushViewController(addListViewController, animated: true)
     }
     
+    // ----------------------------------- //
+    private func delete(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "Deletar") { [weak self] (_,_,_) in
+            guard let self = self else {return}
+            self.listTable.beginUpdates()
+            CDMainList().delete(cdMainList: self.mainList[indexPath.section][indexPath.row])
+            self.listTable.deleteRows(at: [indexPath], with: .fade)
+            self.mainList = CDMainList().getLists()
+            self.listTable.reloadData()
+            self.listTable.endUpdates()
+        }
+        return action
+    }
+    
+    private func edit(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Editar") { [weak self] (_,_,_) in
+            guard let self = self else {return}
+            
+            let editMainListViewController = self.storyboard?.instantiateViewController(withIdentifier: "editMainListViewController") as! EditMainListViewController
+            editMainListViewController.selectedList = self.mainList[indexPath.section][indexPath.row]
+            editMainListViewController.update = {
+                self.mainList = CDMainList().getLists()
+                DispatchQueue.main.async {
+                    self.listTable.reloadData()
+                }
+            }
+            self.navigationController?.pushViewController(editMainListViewController, animated: true)
+        }
+        return action
+    }
     // TableView Delegate
     // Ação para quando selecionar uma linha
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -44,6 +84,17 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
         navigationController?.pushViewController(productListViewController, animated: true)
         
         listTable.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = self.edit(rowIndexPath: indexPath)
+        let delete = self.delete(rowIndexPath: indexPath)
+        let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
+        return swipe
     }
     
     // Função para determinar o nome de cada seção
@@ -60,34 +111,26 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // Determinar o estilo de edição
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        
         return .delete
     }
     
     // Arrastar listas
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let sourceList = mainList[sourceIndexPath.section][sourceIndexPath.row]
-        let destinationList = mainList[destinationIndexPath.section][destinationIndexPath.row]
         
         if sourceIndexPath.section == destinationIndexPath.section {
+            let destinationList = mainList[destinationIndexPath.section][destinationIndexPath.row]
+            
             CDMainList().swapLists(firstList: sourceList, secondList: destinationList)
+            
             mainList = CDMainList().getLists()
             listTable.reloadData()
         } else {
             CDMainList().changeFavoriteStatus(cdMainList: sourceList)
+            
             mainList = CDMainList().getLists()
             listTable.reloadData()
-        }
-    }
-    
-    // Deletar listas
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            listTable.beginUpdates()
-            CDMainList().delete(cdMainList: mainList[indexPath.section][indexPath.row])
-            listTable.deleteRows(at: [indexPath], with: .fade)
-            mainList = CDMainList().getLists()
-            listTable.reloadData()
-            listTable.endUpdates()
         }
     }
     
@@ -115,16 +158,17 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
         
         // ViewController
         self.title = "Make a List"
+        view.backgroundColor = UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1)
         
         // TableView
         listTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell01")
         listTable.delegate = self
         listTable.dataSource = self
         
-        // Navigation Controller
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .plain, target: self, action: #selector(openMenu))
-        
         // Variáveis
         mainList = CDMainList().getLists()
+        
+        //Navigation Controller
+        self.editButton.title = "Editar"
     }
 }

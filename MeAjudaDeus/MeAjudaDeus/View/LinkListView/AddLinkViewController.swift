@@ -53,10 +53,10 @@ class AddLinkViewController: UIViewController {
 
         // Label
         instructionNameLabel.textAlignment = .center
-        instructionNameLabel.text = "Insira um nome para o link."
+        instructionNameLabel.text = "Insira um nome para o link"
         
         instructionLinkLabel.textAlignment = .center
-        instructionLinkLabel.text = "Insira o link."
+        instructionLinkLabel.text = "Insira o link"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Adicionar", style: .done, target: self, action: #selector(createNewLink))
         

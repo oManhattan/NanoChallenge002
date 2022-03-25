@@ -63,13 +63,14 @@ public class CDLink: NSManagedObject {
     
     // Alterar dois links de lugar
     public func swapLink(firstLink: CDLink, secondLink: CDLink) {
-        let temp = firstLink
+        let auxName = firstLink.name
+        let auxLink = firstLink.link
         
         firstLink.name = secondLink.name
         firstLink.link = secondLink.link
         
-        secondLink.name = temp.name
-        secondLink.link = temp.link
+        secondLink.name = auxName
+        secondLink.link = auxLink
     }
     
     // Regatar todos os links com um ID
