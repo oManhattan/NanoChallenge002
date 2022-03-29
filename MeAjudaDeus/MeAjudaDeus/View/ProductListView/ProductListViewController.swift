@@ -77,6 +77,26 @@ class ProductListViewController: UIViewController, UITableViewDelegate, UITableV
         return action
     }
     
+    private func favorite(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Realizar") { [weak self] (_,_,_) in
+            guard let self = self else {return}
+            
+            self.productTable.beginUpdates()
+            CDProduct().changeIsDone(product: self.productList[indexPath.section][indexPath.row])
+            self.productTable.deleteRows(at: [indexPath], with: .none)
+            
+            if indexPath.section == 0 {
+                self.productTable.insertRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
+            } else {
+                self.productTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+            }
+            self.productList = CDProduct().getProducts(whereID: self.selectedList.id)
+            self.productTable.reloadData()
+            self.productTable.endUpdates()
+        }
+        return action
+    }
+    
     // TableView
     // TableView Delegate
     // Ação para quando uma célula for selecionada
@@ -106,8 +126,18 @@ class ProductListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = self.edit(rowIndexPath: indexPath)
         edit.backgroundColor = .link
+        
         let delete = self.delete(rowIndexPath: indexPath)
-        let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
+        
+        let favoritar = self.favorite(rowIndexPath: indexPath)
+        if productList[indexPath.section][indexPath.row].isDone == true {
+            favoritar.title = "Desejar"
+        } else {
+            favoritar.title = "Realizar"
+        }
+        favoritar.backgroundColor = .systemYellow
+        
+        let swipe = UISwipeActionsConfiguration(actions: [delete, edit, favoritar])
         return swipe
     }
     

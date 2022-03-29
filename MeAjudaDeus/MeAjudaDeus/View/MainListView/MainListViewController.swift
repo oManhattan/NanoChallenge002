@@ -75,6 +75,28 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         return action
     }
+    
+    private func favorite(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Favoritar") { [weak self] (_,_,_) in
+            guard let self = self else {return}
+            
+            self.listTable.beginUpdates()
+            CDMainList().changeFavoriteStatus(cdMainList: self.mainList[indexPath.section][indexPath.row])
+            self.listTable.deleteRows(at: [indexPath], with: .none)
+            
+            if indexPath.section == 0 {
+                self.listTable.insertRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
+            } else {
+                self.listTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+            }
+            
+            self.mainList = CDMainList().getLists()
+            self.listTable.reloadData()
+            self.listTable.endUpdates()
+        }
+        return action
+    }
+    
     // TableView Delegate
     // Ação para quando selecionar uma linha
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -93,8 +115,18 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = self.edit(rowIndexPath: indexPath)
         edit.backgroundColor = .link
+        
         let delete = self.delete(rowIndexPath: indexPath)
-        let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
+        
+        let favoritar = self.favorite(rowIndexPath: indexPath)
+        if mainList[indexPath.section][indexPath.row].isFavorito == true {
+            favoritar.title = "Desfavoritar"
+        } else {
+            favoritar.title = "Favoritar"
+        }
+        favoritar.backgroundColor = .systemYellow
+        
+        let swipe = UISwipeActionsConfiguration(actions: [delete, edit, favoritar])
         return swipe
     }
     
